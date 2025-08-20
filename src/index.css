@@ -1,0 +1,39 @@
+/* Prevent horizontal scroll issues */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Replace 100vw with 100% where possible */
+.home-section,
+.home-navbar,
+.space-canvas-bg {
+  width: 100%;
+  max-width: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Sections should not force full viewport width */
+section, .home-section, .about-section {
+  width: 100%;
+  max-width: 100%;
+  padding-left: 16px;   /* 👈 adds gap on mobile/tablets */
+  padding-right: 16px;  /* 👈 adds gap on mobile/tablets */
+  box-sizing: border-box;
+}
+
+/* Navbar and space canvas should not overflow */
+.home-navbar,
+.space-canvas-bg {
+  width: 100%;
+  max-width: 100%;
+}

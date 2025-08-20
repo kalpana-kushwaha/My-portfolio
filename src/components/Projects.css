@@ -1,0 +1,127 @@
+/* Projects Section */
+.projects-section {
+  padding: 60px 20px;
+  background: rgba(5, 10, 25, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #eaf6ff;
+  min-height: 70vh;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.projects-section .section-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #7abfff; /* softer blue */
+  letter-spacing: 1.6px;
+  text-align: center;
+  text-shadow: 0 2px 12px #e8eef533;
+  margin-bottom: 50px;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6, #ffe066);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.projects-section .projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 11;
+}
+
+/* Card styles */
+.projects-section .project-card {
+  background: rgba(10, 16, 32, 0.75);
+  border-radius: 16px;
+  padding: 28px 22px;
+  flex: 1 1 320px;
+  max-width: 360px;
+  box-shadow: 0 4px 20px 0 #1e90ff33;
+  transition: transform 0.6s ease, box-shadow 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  text-align: center;
+  border: 1px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: border-box;
+  background-image: 
+    linear-gradient(rgba(10,16,32,0.85), rgba(10,16,32,0.85)), 
+    linear-gradient(135deg, #7abfff, #b486f9, #ff9fd6);
+}
+
+/* Visible state */
+.projects-section .projects-container .project-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.8s ease-out;
+}
+
+/* Hover effect */
+.projects-section .project-card:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 12px 36px 0 #4aa3ffcc;
+}
+
+/* Gradient Title */
+.projects-section .project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6);
+  background-clip: text;    
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.projects-section .project-subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c8e7ff;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+.projects-section .project-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #e0e6f0;
+}
+
+/* Gradient GitHub link */
+.projects-section .project-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6);
+  background-clip: text;    
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: opacity 0.3s ease;
+}
+
+.projects-section .project-link:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 12px #4aa3ff99;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .projects-section .projects-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .projects-section .project-card {
+    width: 100%;
+    max-width: 90%;
+  }
+}

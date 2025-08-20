@@ -1,0 +1,186 @@
+.certs-section {
+  padding: 50px 20px;
+  background: rgba(5, 10, 25, 0.9);
+  color: #eaf6ff;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.certs-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 28px;
+  text-align: center;
+  letter-spacing: 1.2px;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6, #ffe066);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 12px #1e90ff33;
+}
+
+.cert-grid {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Always 4 per row */
+  gap: 20px;
+  justify-items: center;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.cert-card:nth-child(5) {
+  grid-column: 2;
+}
+.cert-card:nth-child(6) {
+  grid-column: 3;
+}
+
+/* ---- Holographic Ticket Card ---- */
+.cert-card {
+  position: relative;
+  padding: 20px 18px 22px 26px;
+  border-radius: 16px;
+  border: 1.5px solid transparent;
+
+  background:
+    linear-gradient(rgba(10,16,32,0.85), rgba(10,16,32,0.85)) padding-box,
+    conic-gradient(from 0deg, #7abfff, #b486f9, #ff9fd6, #7affb5, #7abfff) border-box;
+  box-shadow: 0 4px 20px #1e90ff33;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+  will-change: transform;
+  isolation: isolate;
+
+  width: 260px;           /* Base fixed width on desktop */
+  max-width: 90vw;        /* Prevent overflow on any screen */
+  min-height: 180px;      /* Equal minimal height */
+  box-sizing: border-box; /* Include padding and border in width */
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: -10px;
+  width: 26px;
+  background:
+    radial-gradient(circle at 18px 8px, transparent 6px, rgba(10,16,32,0.9) 7px)
+    0 0/26px 22px repeat-y;
+  border-right: 1px dashed rgba(255,255,255,0.18);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.cert-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.09) 28%, transparent 44%);
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+
+.cert-card:hover::after {
+  transform: translateX(120%);
+}
+
+.cert-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 36px #4aa3ff99;
+  filter: saturate(1.05);
+}
+
+
+.cert-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  line-height: 1.35;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cert-issuer {
+  font-size: 0.95rem;
+  color: #cfe8ff;
+  opacity: 0.9;
+}
+
+.cert-year {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: radial-gradient(120% 120% at 0% 0%, #7abfff55, transparent 60%),
+              radial-gradient(120% 120% at 100% 100%, #ff9fd655, transparent 60%);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+}
+
+.cert-btn {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(135deg, #7abfff, #ff9fd6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: opacity 0.25s ease, text-shadow 0.25s ease;
+}
+
+.cert-btn:hover {
+  opacity: 0.85;
+  text-shadow: 0 0 10px #7abfff66;
+}
+
+.cert-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ✅ Tablet (≤1024px) — 2 per row */
+@media (max-width: 1024px) {
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cert-card:nth-child(5),
+  .cert-card:nth-child(6) {
+    grid-column: auto;
+  }
+
+  .cert-card {
+    width: 45vw;        /* Smaller width to fit 2 cards nicely */
+    max-width: 380px;
+  }
+}
+
+/* ✅ Mobile (≤600px) — 1 per row */
+@media (max-width: 600px) {
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+  .cert-card {
+    width: 90vw;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
