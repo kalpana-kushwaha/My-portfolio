@@ -11,13 +11,13 @@ const About = ({ id = "about" }) => {
         <div className="about-text-block">
             <p className="about-text">
               I’m <strong>Kalpana Kushwaha</strong>, a Software Engineer specializing in 
-              <strong>Machine Learning, Data Analytics, and Full-Stack Development</strong>. 
+              <strong> Machine Learning, Data Analytics, and Full-Stack Development</strong>. 
               I develop intelligent systems and scalable applications that turn complex data into practical, real-world solutions. 
               <br/>
               My projects range from <em>AI-powered Brain Tumor Detection</em> and 
               <em>NeuroNotes — a smart NLP-based notes app</em> to advanced predictive dashboards built in R. 
               I have co-authored a <strong>Scopus-indexed research paper</strong> and filed a 
-              <strong>patent</strong> in AI-driven healthcare innovation.
+              <strong> patent</strong> in AI-driven healthcare innovation.
               <br/>
               Beyond coding, I am passionate about exploring emerging technologies and design methodologies to seamlessly connect 
               <strong> data, AI, and user experience</strong>, striving to create impactful and meaningful innovations.
