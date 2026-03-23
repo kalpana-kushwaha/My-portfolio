@@ -4,11 +4,53 @@ import "aos/dist/aos.css";
 import "./Certifications.css";
 
 const data = [
+  {
+    title: "Inside Agentic AI: Foundations and Frontiers",
+    issuer: "Skillsoft",
+    year: 2025,
+    url: "https://skillsoft.digitalbadges.skillsoft.com/36b56979-9cba-49a4-8e54-250042fea7a3",
+    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+  },
+    {
+    title: "Inside Agentic AI: Core Architecture of Agentic Systems",
+    issuer: "Skillsoft",
+    year: 2025,
+    url: "https://skillsoft.digitalbadges.skillsoft.com/b732e970-1895-4341-aaf8-ebdb8ce3dc22#acc.Iac4sVrj",
+    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+  },
+  {
+    title: "Inside Agentic AI: Popular Frameworks",
+    issuer: "Skillsoft",
+    year: 2025,
+    url: "https://skillsoft.digitalbadges.skillsoft.com/33612017-01ef-4342-a442-2bb2293ca406#acc.9ME3RifU",
+    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+  },
   { 
     title: "Career Essentials in Generative AI", 
     issuer: "Microsoft & LinkedIn", 
     year: 2025,
     url: "https://www.linkedin.com/learning/certificates/cfe9ec35e507616e49e403c644f9841fde3ffa9c72ee496d0e4e1b978bf1a2d7",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg"
+  },
+    {
+    title: "AI Coding Agents with GitHub Copilot and Cursor",
+    issuer: "LinkedIn",
+    year: 2025,
+    url: "https://www.linkedin.com/learning/certificates/3480062668b077252fb5a114e77fc0aecaaaa89fd91e2f80cd1c33b7795a0b55",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg"
+  },
+    {
+    title: "Generative AI: Working with Large Language Models",
+    issuer: "LinkedIn",
+    year: 2025,
+    url: "https://www.linkedin.com/learning/certificates/321d287840501999517e22a09846810bf52b4aedd16a27f865272d124832b027",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg"
+  },
+  {
+    title: "Introduction to Large Language Models",
+    issuer: "LinkedIn",
+    year: 2025,
+    url: "https://www.linkedin.com/learning/certificates/db2f8a5213b73c4a59252c57a68ce13905f5e99027e28f91aea5c4ce07e21f80",
     logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg"
   },
   { 
@@ -45,7 +87,21 @@ const data = [
     year: 2023,
     url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/details/certifications/1718463558779/single-media-viewer/?profileId=ACoAADl0kEgBN5Weg4t2Vr5bWllEjwlsbyVgF94",
     logo: "https://cdn.brandfetch.io/id_7zyHL2W/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"
-  }
+  },
+    {
+    title: "PCAP: Programming Essentials in Python",
+    issuer: "Cisco",
+    year: 2023,
+    url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/details/certifications/1718463468131/single-media-viewer/?profileId=ACoAADl0kEgBN5Weg4t2Vr5bWllEjwlsbyVgF94",
+    logo: "https://cdn.worldvectorlogo.com/logos/cisco-2.svg"
+  },
+   {
+    title: "JavaScript Essentials 1",
+    issuer: "Cisco",
+    year: 2023,
+    url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/details/certifications/1718464101620/single-media-viewer/?profileId=ACoAADl0kEgBN5Weg4t2Vr5bWllEjwlsbyVgF94",
+    logo: "https://cdn.worldvectorlogo.com/logos/cisco-2.svg"
+  },
 ];
 
 const flips = ["flip-left", "flip-right", "flip-up", "flip-down"];

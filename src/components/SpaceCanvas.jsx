@@ -51,6 +51,18 @@ const LOG_COLOR_BOLD = 'rgba(120,255,120,0.28)';
     // For rare node/packet events
     const nodeEvent = useRef({ idx: -1, until: 0, color: '' });
     const packetEvents = useRef([]); // {from, to, t, fail, retry, color, timer}
+    // Initialize stars once
+    const stars = useRef(null);
+    if (!stars.current) {
+      stars.current = Array.from({ length: 220 }, () => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: 0.4 + Math.random() * 1.4,
+        base: 0.3 + Math.random() * 0.6,
+        speed: 0.0008 + Math.random() * 0.0022,
+        phase: Math.random() * Math.PI * 2,
+      }));
+    }
 const CONNECTIONS = [
   [0, 1], // Frontend -> API Gateway
   [1, 2], // API Gateway -> Backend
@@ -63,7 +75,7 @@ const PACKET_COLOR = '#fffbe6';
 const PACKET_GLOW = '#00ffb3';
 
 const GRID_COLOR = 'rgba(0,255,255,0.07)';
-const BG_GRADIENT = ['#0a0d13', '#181c24'];
+const BG_GRADIENT = ['#080c18', '#0f1420'];
 
 // ...existing code...
 
@@ -117,23 +129,19 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
 
 
     // Blueprint grid with subtle flicker
-    let gridFlicker = 0;
-    function drawGrid(now) {
+    function drawGrid() {
       ctx.save();
-      ctx.strokeStyle = GRID_COLOR;
-      ctx.lineWidth = 1;
-      const flicker = 1 + 0.03 * Math.sin(now * 0.0007 + gridFlicker);
-      for (let x = 0; x < width; x += 64 * flicker) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-      for (let y = 0; y < height; y += 64 * flicker) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
+      for (let gx = 0; gx < width; gx += 48) {
+        for (let gy = 0; gy < height; gy += 48) {
+          const isMajor = (Math.round(gx / 48) % 4 === 0) && 
+                          (Math.round(gy / 48) % 4 === 0);
+          ctx.beginPath();
+          ctx.arc(gx, gy, 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = isMajor 
+            ? 'rgba(0,255,255,0.22)' 
+            : 'rgba(0,255,255,0.10)';
+          ctx.fill();
+        }
       }
       ctx.restore();
     }
@@ -157,8 +165,46 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
   ctx.translate(mx * 24, my * 18); // grid parallax
   ctx.fillStyle = grad;
   ctx.fillRect(-32, -32, width + 64, height + 64);
+  // Nebula blobs
+  const nebulas = [
+    { x: 0.15, y: 0.25, r: 320, color: '#1a3a6b', alpha: 0.45 },
+    { x: 0.85, y: 0.20, r: 280, color: '#3b1a6b', alpha: 0.40 },
+    { x: 0.50, y: 0.80, r: 350, color: '#6b1a45', alpha: 0.35 },
+    { x: 0.80, y: 0.70, r: 260, color: '#0d4a4a', alpha: 0.40 },
+    { x: 0.20, y: 0.75, r: 240, color: '#1a4a1a', alpha: 0.30 },
+  ];
+  for (const nb of nebulas) {
+    const nx = nb.x * width + Math.sin(now * 0.0003 + nb.x * 10) * 30;
+    const ny = nb.y * height + Math.cos(now * 0.0002 + nb.y * 10) * 20;
+    const grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, nb.r);
+    grad.addColorStop(0, nb.color + 'cc');
+    grad.addColorStop(0.5, nb.color + '55');
+    grad.addColorStop(1, 'transparent');
+    ctx.save();
+    ctx.globalAlpha = nb.alpha;
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(nx, ny, nb.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+  // Starfield
+  ctx.save();
+  for (const s of stars.current) {
+    const sx = s.x * width;
+    const sy = s.y * height;
+    const opacity = s.base + 0.35 * Math.sin(now * s.speed + s.phase);
+    ctx.globalAlpha = Math.max(0, opacity);
+    ctx.fillStyle = '#e8f4ff';
+    ctx.shadowColor = '#ffffff';
+    ctx.shadowBlur = s.r > 1.4 ? 5 : 0;
+    ctx.beginPath();
+    ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
   // Blueprint grid with flicker and parallax
-  drawGrid(now);
+  drawGrid();
   ctx.restore();
 
 
@@ -249,6 +295,25 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
         }
         const x = p1.x + (p2.x - p1.x) * pkt.t;
         const y = p1.y + (p2.y - p1.y) * pkt.t;
+        // Trail
+        const dx = p2.x - p1.x;
+        const dy = p2.y - p1.y;
+        // eslint-disable-next-line no-unused-vars
+        const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+        const trailOpacities = [0.5, 0.32, 0.18, 0.08];
+        const trailSizes = [5, 4, 3, 2];
+        for (let t = 0; t < 4; t++) {
+          const trailT = Math.max(0, pkt.t - (t + 1) * 0.04);
+          const tx2 = p1.x + (p2.x - p1.x) * trailT;
+          const ty2 = p1.y + (p2.y - p1.y) * trailT;
+          ctx.save();
+          ctx.globalAlpha = trailOpacities[t];
+          ctx.fillStyle = PACKET_COLOR;
+          ctx.beginPath();
+          ctx.arc(tx2, ty2, trailSizes[t], 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
         ctx.save();
         ctx.globalAlpha = 0.7;
         ctx.shadowColor = PACKET_GLOW;
@@ -277,33 +342,6 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
         // Parallax
         p1 = { x: p1.x + mx * 24, y: p1.y + my * 18 };
         p2 = { x: p2.x + mx * 24, y: p2.y + my * 18 };
-        const x = p1.x + (p2.x - p1.x) * pkt.t;
-        const y = p1.y + (p2.y - p1.y) * pkt.t;
-        ctx.save();
-        ctx.globalAlpha = 0.7;
-        ctx.shadowColor = pkt.color;
-        ctx.shadowBlur = 16;
-        ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fillStyle = pkt.color;
-        ctx.fill();
-        ctx.restore();
-      }
-      // Animate and draw fail/retry packets
-      for (let i = packetEvents.current.length - 1; i >= 0; i--) {
-        const pkt = packetEvents.current[i];
-        pkt.t += dt * 0.22;
-        if (pkt.fail && now > pkt.timer) {
-          pkt.fail = false; pkt.retry = true; pkt.t = 0; pkt.color = '#43ea7f'; pkt.timer = now + 1200;
-        }
-        if (pkt.retry && pkt.t > 1) {
-          packetEvents.current.splice(i, 1);
-          continue;
-        }
-        if (!pkt.fail && !pkt.retry) continue;
-        const p1 = nodePos(pkt.from, width, height);
-        const p2 = nodePos(pkt.to, width, height);
         const x = p1.x + (p2.x - p1.x) * pkt.t;
         const y = p1.y + (p2.y - p1.y) * pkt.t;
         ctx.save();
@@ -360,15 +398,26 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
           ctx.restore();
         }
         // Node label
+        // Label pill below node
+        const labelY = y + 34 * pulse + 18;
+        const labelText = n.label;
         ctx.save();
-        ctx.globalAlpha = 0.7;
-        ctx.font = 'bold 18px Fira Mono, Menlo, monospace';
+        ctx.font = 'bold 13px Fira Mono, Menlo, monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.shadowColor = '#00ffe7';
-        ctx.shadowBlur = 8;
-        ctx.fillStyle = '#eaffff';
-        ctx.fillText(n.label, x, y);
+        const textW = ctx.measureText(labelText).width;
+        // Dark pill background
+        ctx.globalAlpha = hovered ? 0.85 : 0.65;
+        ctx.fillStyle = 'rgba(8, 12, 24, 0.75)';
+        ctx.beginPath();
+        ctx.roundRect(x - textW/2 - 8, labelY - 9, textW + 16, 18, 6);
+        ctx.fill();
+        // Label text
+        ctx.globalAlpha = hovered ? 1 : 0.85;
+        ctx.fillStyle = hovered ? '#ffffff' : '#eaffff';
+        ctx.shadowColor = hovered ? '#00ffe7' : 'transparent';
+        ctx.shadowBlur = hovered ? 8 : 0;
+        ctx.fillText(labelText, x, labelY);
         ctx.restore();
       }
 
@@ -380,7 +429,7 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
         const { x, y } = nodePos(i, width, height);
         for (let r = 60; r < 180; r += 40) {
           ctx.beginPath();
-          ctx.arc(x, y, r + 8 * Math.sin(last * 0.0007 + i + r), 0, Math.PI * 2);
+          ctx.arc(x, y, r + 8 * Math.sin(now * 0.0007 + i + r), 0, Math.PI * 2);
           ctx.strokeStyle = '#00ffe7';
           ctx.lineWidth = 2;
           ctx.stroke();
@@ -398,12 +447,12 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
       ctx.restore();
       // Status logs (Easter egg lines, faint system logs)
       // Add new log every 2-3s for better visibility
-      if (now - lastLogTime.current > 2000 + Math.random() * 1000) {
+      if (now - lastLogTime.current > 4000 + Math.random() * 1500) {
         logs.current.push({
           text: STATUS_LOGS[Math.floor(Math.random() * STATUS_LOGS.length)],
           // Central vertical band for visibility
           y: height * 0.35 + Math.random() * height * 0.3,
-          opacity: 0.3,
+          opacity: 0.08,
           t: 0,
         });
         lastLogTime.current = now;
@@ -412,12 +461,12 @@ const BG_GRADIENT = ['#0a0d13', '#181c24'];
       for (let i = logs.current.length - 1; i >= 0; i--) {
         const log = logs.current[i];
         log.t += dt * 1.5; // Move faster
-        log.opacity += 0.018;
-        if (log.opacity > 0.32) log.opacity = 0.32;
+        log.opacity += 0.008;
+        if (log.opacity > 0.15) log.opacity = 0.15;
         // Move left
         ctx.save();
         ctx.globalAlpha = log.opacity;
-        ctx.font = '18px Fira Mono, Menlo, monospace';
+        ctx.font = '12px Fira Mono, Menlo, monospace';
         ctx.fillStyle = log.text.includes('ERROR') ? 'rgba(255,80,80,0.28)' : (log.text.includes('SUCCESS') ? LOG_COLOR_BOLD : LOG_COLOR);
         ctx.fillText(log.text, 40 + log.t * 38, log.y);
         ctx.restore();

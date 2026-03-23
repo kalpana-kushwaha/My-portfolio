@@ -1,30 +1,41 @@
 import './About.css';
 import Lottie from "lottie-react";
-import coderAnimation from "../assets/Coding boy.json"; 
+import coderAnimation from "../assets/Coding boy.json";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const About = ({ id = "about" }) => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: false });
+  }, []);
+
   return (
     <section id={id} className="about-section">
       <h2 className="about-title">About Me</h2>
 
       <div className="about-container about-two-col">
-        <div className="about-text-block">
-            <p className="about-text">       
-  I’m <strong> Kalpana Kushwaha</strong>, a Software Engineer with a passion for turning complex problems into 
-  <strong> intelligent, user-friendly solutions</strong>. My expertise lies in <strong>Machine Learning, Data Analytics, and Full-Stack Development</strong>, 
-  where I love building applications that combine <strong>data, AI, and seamless user experience</strong>.
-  <br/><br/>
-  My work spans from developing <strong>AI-powered Brain Tumor Detection systems</strong> (patent filed in AI-driven healthcare innovation) 
-  to creating <strong>NeuroNotes — a smart NLP-based note-taking app</strong>, as well as designing 
-  <strong> predictive dashboards in R</strong> that bring data insights to life.
-  <br/><br/>
-  Beyond code, I’m deeply curious about <strong>emerging technologies and design methodologies</strong>, always exploring how to push boundaries 
-  and craft innovations that are not just functional, but impactful and meaningful in the real world.
-</p>
+        <div className="about-text-block" data-aos="fade-up">
+          <p className="about-text-para">
+            I'm <strong>Kalpana Kushwaha</strong>, a Software Engineer who builds intelligent systems
+            at the intersection of <strong>Machine Learning, Data Analytics, and Full-Stack Development</strong>.
+            I don't just build things — I build things that <strong>think</strong>.
+          </p>
 
+          <p className="about-text-para">
+            My work includes <strong>NeuroNotes</strong> — a full-stack AI notes platform with RAG-based chat,
+            Llama 3 summarization, and semantic vector search — a <strong>Brain Tumor Detection system</strong>
+            combining CNN, SVM, and MobileNetV2 into a stacked ensemble, a freelance-built
+            <strong> coaching website</strong>, and an <strong>employee attrition prediction dashboard</strong> in R with live Shiny integration.
+          </p>
+
+          <p className="about-text-para">
+            What ties it all together is a belief that <strong>great engineering is invisible</strong> —
+            the best systems feel effortless to the people using them, no matter how complex they are underneath.
+          </p>
         </div>
         {/* Animated coder illustration */}
-        <div className="about-illustration" aria-hidden="true">
+        <div className="about-illustration" data-aos="fade-left" aria-hidden="true">
           <Lottie 
             animationData={coderAnimation} 
             loop={true} 
@@ -33,7 +44,7 @@ const About = ({ id = "about" }) => {
         </div>
       </div>
       {/* Key Achievements Section below */}
-      <div className="about-key-achievements">
+      <div className="about-key-achievements" data-aos="zoom-in">
         <div className="key-ach-title">Key Achievements</div>
         <div className="key-ach-list">
           <div className="key-ach-item">

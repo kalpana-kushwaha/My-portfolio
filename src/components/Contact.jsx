@@ -43,31 +43,50 @@ const Contact = ({ id = "contact" }) => {
         I’d love to hear from you! Feel free to reach out for opportunities, collaborations, or just a friendly hello.
       </p>
 
-      <div className="contact-card">
-        {/* Contact Info */}
-        <div className="contact-info">
-          <p className="email-line">
-            <Mail size={18} /> <a href="mailto:kalpana1kushwaha@gmail.com">kalpana1kushwaha@gmail.com</a>
-          </p>         
+      <div className="contact-container">
+        {/* Left Column: Contact Info Cards */}
+        <div className="contact-info-column">
+          <div className="contact-info-card">
+            <div className="contact-icon">
+              <Mail size={28} />
+            </div>
+            <div className="contact-details">
+              <h3>Email</h3>
+              <a href="mailto:kalpana1kushwaha@gmail.com">kalpana1kushwaha@gmail.com</a>
+            </div>
+          </div>
 
-          <div className="social-icons">
-            <a href="https://github.com/kalpana-kushwaha" target="_blank" rel="noopener noreferrer">
-              <Github size={22} />
-            </a>
-            <a href="https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/" target="_blank" rel="noopener noreferrer">
-              <Linkedin size={22} />
-            </a>
+          <div className="contact-info-card">
+            <div className="contact-icon">
+              <Github size={28} />
+            </div>
+            <div className="contact-details">
+              <h3>GitHub</h3>
+              <a href="https://github.com/kalpana-kushwaha" target="_blank" rel="noopener noreferrer">kalpana-kushwaha</a>
+            </div>
+          </div>
+
+          <div className="contact-info-card">
+            <div className="contact-icon">
+              <Linkedin size={28} />
+            </div>
+            <div className="contact-details">
+              <h3>LinkedIn</h3>
+              <a href="https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/" target="_blank" rel="noopener noreferrer">kalpana-kushwaha</a>
+            </div>
           </div>
         </div>
 
-        {/* Contact Form */}
-        <form ref={form} className="contact-form" onSubmit={sendEmail}>
-          <input type="text" name="user_name" placeholder="Your Name" required />
-          <input type="email" name="user_email" placeholder="Your Email" required />
-          <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-          <button type="submit" className="send-btn">Send Message</button>
-          {status && <p className="form-status">{status}</p>}
-        </form>
+        {/* Right Column: Contact Form */}
+        <div className="contact-form-column">
+          <form ref={form} className="contact-form" onSubmit={sendEmail}>
+            <input type="text" name="user_name" placeholder="Your Name" required />
+            <input type="email" name="user_email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" className="send-btn">Send Message</button>
+            {status && <p className="form-status">{status}</p>}
+          </form>
+        </div>
       </div>
     </section>
   );

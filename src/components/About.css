@@ -75,26 +75,67 @@
   flex-direction: column;
   gap: 20px;
   animation: fadeUp 1s ease both;
-  align-items: center;   /* centers child blocks horizontally */
-  text-align: center;    /* centers text inside */
+  padding: 32px;
+  background: rgba(20, 30, 60, 0.75);
+  border-radius: 16px;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1.5px solid;
+  border-image: conic-gradient(
+    from 0deg,
+    #7abfff,
+    #ff9fd6,
+    #ffe066,
+    #7affb5,
+    #b486f9,
+    #7abfff
+  ) 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 20px rgba(122, 191, 255, 0.15);
+  transition: all 0.3s ease;
 }
 
-.about-text {
+.about-text-block:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba(122, 191, 255, 0.25);
+  transform: translateY(-4px);
+}
+
+.about-text-para {
   font-size: 1.15rem;
   color: #e0e6f0;
-  line-height: 1.75;
-  background: rgba(10, 16, 32, 0.75);
-  padding: 22px 28px;
-  border-radius: 14px;
-  box-shadow: 0 2px 20px 0 #0a1a2f55;
-  transition: transform 0.3s, box-shadow 0.3s;
-  text-align: center;    /* center align text itself */
+  line-height: 1.8;
+  padding: 18px 22px;
+  border-radius: 10px;
+  position: relative;
+  padding-left: 22px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
 }
 
+/* Left-border glow effect */
+.about-text-para::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+  background: linear-gradient(180deg, #7abfff, #ff9fd6);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
 
-.about-text:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 28px 0 #1e90ff44;
+.about-text-para:hover {
+  background: rgba(122, 191, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.about-text-para:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 16px rgba(122, 191, 255, 0.6);
 }
 
 .about-illustration {
@@ -125,13 +166,38 @@
 
 /* Key Achievements Section */
 .about-key-achievements {
-  margin: 18px 0 0 0;
-  padding: 18px 18px 12px 18px;
-  background: rgba(10, 16, 32, 0.92);
-  border-radius: 14px;
-  box-shadow: 0 2px 24px 0 #1e90ff22, 0 0 0 2px #1e90ff22;
-  max-width: 700px;
+  margin: 32px 0 0 0;
+  padding: 28px 32px;
+  background: rgba(20, 30, 60, 0.75);
+  border-radius: 16px;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  max-width: 900px;
   color: #eaf6ff;
+  border: 1.5px solid;
+  border-image: conic-gradient(
+    from 0deg,
+    #7abfff 0%,
+    #ff9fd6 25%,
+    #ffe066 50%,
+    #7affb5 75%,
+    #b486f9 100%,
+    #7abfff
+  ) 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 20px rgba(122, 191, 255, 0.15);
+  animation: shimmerBg 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.about-key-achievements:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba(122, 191, 255, 0.35);
+}
+
+@keyframes shimmerBg {
+  0%, 100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(122, 191, 255, 0.15); }
+  50% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 159, 214, 0.25); }
 }
 
 .key-ach-title {
@@ -157,19 +223,50 @@
   align-items: flex-start;
   gap: 12px;
   font-size: 1.04rem;
-  line-height: 1.5;
-  background: rgba(30, 144, 255, 0.07);
-  border-radius: 10px;
-  padding: 18px 22px;
-  box-shadow: 0 1px 8px 0 #1e90ff11;
-  min-width: 260px;
-  max-width: 380px;
-  flex: 1 1 320px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  line-height: 1.6;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.1), rgba(122, 191, 255, 0.05));
+  border-radius: 12px;
+  padding: 20px 24px;
+  border: 1px solid rgba(122, 191, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(122, 191, 255, 0.1),
+              inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  min-width: 280px;
+  max-width: 420px;
+  flex: 1 1 350px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Shimmer effect on item */
+.key-ach-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.key-ach-item:hover::after {
+  left: 100%;
+}
+
 .key-ach-item:hover, .key-ach-item:focus-within {
-  box-shadow: 0 4px 24px 0 #1e90ff44, 0 0 0 2px #1e90ff;
-  transform: translateY(-4px) scale(1.03);
+  background: linear-gradient(135deg, rgba(122, 191, 255, 0.15), rgba(255, 159, 214, 0.08));
+  box-shadow: 0 8px 32px rgba(122, 191, 255, 0.3),
+              inset 0 1px 1px rgba(255, 255, 255, 0.15),
+              0 0 24px rgba(255, 159, 214, 0.2);
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(122, 191, 255, 0.5);
   z-index: 2;
 }
 @media (max-width: 800px) {
@@ -278,14 +375,24 @@
     gap: 20px;
   }
 
-  .about-text {
+  .about-text-block {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .about-text-para {
     font-size: 1.05rem;
     line-height: 1.65;
-    padding: 18px 22px;
+    padding: 14px 18px;
   }
 
   .about-illustration svg {
     max-width: 3000px;
+  }
+
+  .about-key-achievements {
+    padding: 20px 24px;
+    margin: 24px 0 0 0;
   }
 
   /* Stack achievements vertically on small screens */
@@ -295,5 +402,7 @@
 
   .key-ach-item {
     flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 }

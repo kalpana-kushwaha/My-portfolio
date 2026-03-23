@@ -81,7 +81,9 @@ export default function Home() {
             </div>
 
             <div className={`home-subtitle ${show ? 'visible' : ''}`}>
-              Software Engineer | Machine Learning |<br/> Full-Stack Developer
+              <span className="subtitle-pill pill-blue">Software Engineer</span>
+              <span className="subtitle-pill pill-pink">Machine Learning</span>
+              <span className="subtitle-pill pill-cyan">Full-Stack Developer</span>
             </div>
 
             <a
