@@ -9,21 +9,21 @@ const data = [
     issuer: "Skillsoft",
     year: 2025,
     url: "https://skillsoft.digitalbadges.skillsoft.com/36b56979-9cba-49a4-8e54-250042fea7a3",
-    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+    logo: "https://cdn.worldvectorlogo.com/logos/skillsoft.svg"
   },
     {
     title: "Inside Agentic AI: Core Architecture of Agentic Systems",
     issuer: "Skillsoft",
     year: 2025,
     url: "https://skillsoft.digitalbadges.skillsoft.com/b732e970-1895-4341-aaf8-ebdb8ce3dc22#acc.Iac4sVrj",
-    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+    logo: "https://cdn.worldvectorlogo.com/logos/skillsoft.svg"
   },
   {
     title: "Inside Agentic AI: Popular Frameworks",
     issuer: "Skillsoft",
     year: 2025,
     url: "https://skillsoft.digitalbadges.skillsoft.com/33612017-01ef-4342-a442-2bb2293ca406#acc.9ME3RifU",
-    logo: "https://cdn.brandfetch.io/idVfYgMJKm/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
+    logo: "https://cdn.worldvectorlogo.com/logos/skillsoft.svg"
   },
   { 
     title: "Career Essentials in Generative AI", 
@@ -64,14 +64,14 @@ const data = [
     title: "AWS Academy Cloud Foundations", 
     issuer: "AWS Academy", 
     year: 2024,
-    url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/details/certifications/1718463352807/single-media-viewer",
+    url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/overlay/Certifications/476433270/treasury/?profileId=ACoAADl0kEgBN5Weg4t2Vr5bWllEjwlsbyVgF94",
     logo: "https://cdn.brandfetch.io/idVoqFQ-78/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B"
   },
   { 
     title: "Artificial Intelligence: Search Methods for Problem Solving", 
     issuer: "NPTEL", 
     year: 2024,
-    url: "https://www.linkedin.com/authwall?trkInfo=AQE9Z6UgSe-CMwAAAZiF-K4guEglanm9AJKbtkHI7TUKOayrSBNrIDSyox4i3MxLaA-cVFO3EOg-gIzxmb6XegH9pS2VcTTSnWVV-ntRJQ6XfgnmXZowAVeXZG6FNsd8Az5G_Rk=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fkalpana-kushwaha-a889a322a%2Fdetails%2Fcertifications%2F1745856210304%2Fsingle-media-viewer",
+    url: "https://www.linkedin.com/in/kalpana-kushwaha-a889a322a/overlay/Certifications/2099486997/treasury/?profileId=ACoAADl0kEgBN5Weg4t2Vr5bWllEjwlsbyVgF94",
     logo: "https://cdn.brandfetch.io/id_7zyHL2W/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B"
   },
   { 
